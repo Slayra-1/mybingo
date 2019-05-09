@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ include file="/document/common/top.jsp" %>
+<%
+	List<Map<String, Object>> listMap = (List<Map<String, Object>>)request.getAttribute("list");
+	
+	String bingoId  = "";
+		
+	if(null==listMap){
+	
+	}else{
+	
+		bingoId  = listMap.get(0).get("bingoId")==null?"": String.valueOf(listMap.get(0).get("bingoId"));
+	}
+%>
 <style>
 	#bingoTable{
 		text-align: center;
@@ -68,7 +83,12 @@
 	</div>
 	
 	<script>
+	
+	var bingoId = '<%=bingoId%>';
+	
 	$(function(){
+		fn_selectBingo();
+		
 		$("#twitterBtn").click(function(){
 			var value = $(":radio[name='sendTypeRadio']:checked").val();
 			alert("Twitter : " + value);
@@ -82,6 +102,49 @@
 		$("#imageBtn").click(function(){
 			alert("이미지로 저장");
 		})
+		
 	})
+	
+	function fn_selectBingo(){
+			var formData = new FormData();
+			formData.append("bingoId", bingoId);
+			
+			$.ajax({
+				url: encodeURI('/bingo/selectBingo.do'),
+				data: formData,
+				dataType: "json",
+				type: 'POST',
+				contentType: false,
+				processData: false,
+				success: function(data){
+					 console.log(data);
+				},
+				complete: function(data){
+					console.log(data);
+				},
+				error : function(xhr, status, error) {
+					alert(xhr + " " + status + " " + error);
+					/* $('.modal-title').text("알림");
+					$('.modal-body p').text("데이터 조회에 실패했습니다. 나중에 다시 시도해주세요.");
+					$('#myModal').modal('show'); */
+				}
+			});
+		}
 	</script>
+	
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+		    <div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"></h4>
+				</div>
+				<div class="modal-body">
+					<p></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>

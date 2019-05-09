@@ -26,7 +26,7 @@
 	        <a class="nav-link" href="bingo/goBingoPage.do">Link</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#">Disabled</a>
+	        <a class="nav-link" href="bingo/selectBingoIntro.do?bingoId=1">Disabled</a>
 	      </li>
 	    </ul>
 	    <form class="form-inline my-2 my-lg-0">
