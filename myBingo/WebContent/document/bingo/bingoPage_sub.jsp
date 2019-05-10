@@ -22,9 +22,15 @@
 	#bingoTable td{
 		border: 1px solid lightgray;
 	}
+	.btn-secondary:focus, .btn-secondary:active {
+	  box-shadow: none !important;
+	}
+	.btn-secondary{
+		margin:0 3px 0 0;
+	}
 </style>
-<body>
-	<div class="container">
+<body style="background-color:lightgray;">
+	<div class="container" style="background-color:white;">
 		<h1>here is bingo page</h1>
 		<br>
 		<table class="table" id="bingoTable">
@@ -65,6 +71,12 @@
 			</tr>
 		</table>
 		
+		<div id="hashtag_area">
+			<i class="fas fa-tags" style="margin-right:3px;"></i>
+		</div>
+		
+		<br>
+		
 		<button type="button" class="btn btn-primary" id="twitterBtn"><i class="fab fa-twitter"></i> Twitter</button>
 		<button type="button" class="btn btn-info" id="facebookBtn"><i class="fab fa-facebook"></i> Facebook</button>
 		<button type="button" class="btn btn-success" id="imageBtn"><i class="fas fa-images"></i> 이미지로 저장</button>
@@ -83,7 +95,6 @@
 	</div>
 	
 	<script>
-	
 	var bingoId = '<%=bingoId%>';
 	
 	$(function(){
@@ -117,29 +128,44 @@
 				contentType: false,
 				processData: false,
 				success: function(data){
-					 console.log(data);
-				},
-				complete: function(data){
-					console.log(data);
+					if(data.msgCode == 0){
+						var splitStr = data.tags.split(',');
+						var hashNumber = 0;
+						
+						for(var i in splitStr){
+							var innerHTML = '<button class="btn btn-sm btn-secondary" id="hashtag'+ ++hashNumber +'">#' + splitStr[i] + '</button>'
+							$('#hashtag_area').append(innerHTML);
+							
+							// 동적으로 생성된 버튼 객체에 이벤트 할당
+							$('#hashtag_area button').unbind("click").on("click", function(){
+								alert(this.innerHTML);
+							});
+						}
+					}else{
+						$('.modal-title').text(data.msgTitle);
+						$('.modal-body').html(data.msgDesc);
+						$('#myModal').modal('show');
+					}
 				},
 				error : function(xhr, status, error) {
-					alert(xhr + " " + status + " " + error);
-					/* $('.modal-title').text("알림");
+					$('.modal-title').text("알림");
 					$('.modal-body p').text("데이터 조회에 실패했습니다. 나중에 다시 시도해주세요.");
-					$('#myModal').modal('show'); */
+					$('#myModal').modal('show');
 				}
 			});
 		}
 	</script>
 	
 	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog" role="document">
 		    <div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title"></h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+			        </button>
 				</div>
 				<div class="modal-body">
-					<p></p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>

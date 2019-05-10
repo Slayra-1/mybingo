@@ -21,7 +21,7 @@ public class HttpUtil {
 		jsonObject = JSONObject.fromObject(JSONSerializer.toJSON(map));
 	
 		ModelAndView mnv = new ModelAndView();
-		 mnv.setViewName("json"); 
+		mnv.setViewName("notification"); 
 		mnv.addObject("message", jsonObject.toString());
 		return mnv;
 	}

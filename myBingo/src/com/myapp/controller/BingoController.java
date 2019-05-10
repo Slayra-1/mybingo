@@ -34,7 +34,7 @@ public class BingoController {
 		return "../document/bingo/bingoPage";
 	}
 	
-	// 빙고 조회
+	// 빙고 조회 페이지 이동
 	@RequestMapping(value="/bingo/selectBingoIntro.do")
 	public String selectBingoIntro(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		HashMap<String, Object> paramMap = HttpUtil.getParameterMap(request);
@@ -61,7 +61,6 @@ public class BingoController {
 		}catch(DataAccessException e){
 			e.printStackTrace();
 		}
-		
 		
 		System.out.println(map);
 		System.out.println("selectBingo End");

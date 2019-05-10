@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BingoTags">
+
+	<select id="selectBingoTags" parameterType="hashmap" resultType="hashmap">
+		SELECT TAGS	AS "tags"
+			  ,DATE_FORMAT(REG_DATE, '%Y-%m-%d')     AS "regDate"
+			  ,DATE_FORMAT(MOD_DATE, '%Y-%m-%d')     AS "modDate"
+		  FROM BINGO_TAGS
+		 WHERE USE_YN = 'Y'
+		   AND ID = #{bingoId}
+	</select>
+
+</mapper>
