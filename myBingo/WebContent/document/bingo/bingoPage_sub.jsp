@@ -20,7 +20,7 @@
 		text-align: center;
 	}
 	#bingoTable td{
-		border: 1px solid lightgray;
+		border: 1px solid black;
 	}
 	.btn-secondary:focus, .btn-secondary:active {
 	  box-shadow: none !important;
@@ -28,10 +28,13 @@
 	.btn-secondary{
 		margin:0 3px 0 0;
 	}
+	.bingo-checked{
+		background:lightgray;
+	}
 </style>
 <body style="background-color:lightgray;">
 	<div class="container" style="background-color:white;">
-		<h1>here is bingo page</h1>
+		<h1 id="bingoTitle"></h1>
 		<br>
 		<table class="table" id="bingoTable">
 			<tr>
@@ -114,6 +117,10 @@
 			alert("이미지로 저장");
 		})
 		
+		$('#bingoTable tr td').click(function(){
+			$(this).toggleClass("bingo-checked");
+		})
+		
 	})
 	
 	function fn_selectBingo(){
@@ -129,6 +136,11 @@
 				processData: false,
 				success: function(data){
 					if(data.msgCode == 0){
+						console.log(data);
+						// 빙고 제목 초기화
+						$('#bingoTitle').text(data.rows[0].title);
+						
+						// 태그 초기화
 						var splitStr = data.tags.split(',');
 						var hashNumber = 0;
 						

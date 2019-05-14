@@ -10,78 +10,63 @@
 </style>
 <body>
 	<div class="container">
-		<h1>here is bingo page</h1>
-		<br>
-		<table class="table" id="bingoTable">
-			<tr>
-				<td>1-1</td>
-				<td>1-2</td>
-				<td>1-3</td>
-				<td>1-4</td>
-				<td>1-5</td>
-			</tr>
-			<tr>
-				<td>2-1</td>
-				<td>2-2</td>
-				<td>2-3</td>
-				<td>2-4</td>
-				<td>2-5</td>
-			</tr>
-			<tr>
-				<td>3-1</td>
-				<td>3-2</td>
-				<td>3-3</td>
-				<td>3-4</td>
-				<td>3-5</td>
-			</tr>
-			<tr>
-				<td>4-1</td>
-				<td>4-2</td>
-				<td>4-3</td>
-				<td>4-4</td>
-				<td>4-5</td>
-			</tr>
-			<tr>
-				<td>5-1</td>
-				<td>5-2</td>
-				<td>5-3</td>
-				<td>5-4</td>
-				<td>5-5</td>
-			</tr>
+		<table class="table table-hover table-striped">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody id="boardList">
+				<tr>
+					<td>1</td>
+					<td>일반</td>
+					<td>운영자</td>
+					<td>지금</td>
+					<td>0</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>ㅇㅇㅇ</td>
+					<td>운영자</td>
+					<td>지금</td>
+					<td>0</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>ㅁㅁㅁ</td>
+					<td>운영자</td>
+					<td>지금</td>
+					<td>0</td>
+				</tr>
+			</tbody>
 		</table>
 		
-		<button type="button" class="btn btn-primary" id="twitterBtn"><i class="fab fa-twitter"></i> Twitter</button>
-		<button type="button" class="btn btn-info" id="facebookBtn"><i class="fab fa-facebook"></i> Facebook</button>
-		<button type="button" class="btn btn-success" id="imageBtn"><i class="fas fa-images"></i> 이미지로 저장</button>
-		<!-- <div class="form-check">
-		  <input class="form-check-input" type="checkbox" value="" id="sendOriginal">
-		  <label class="form-check-label" for="sendOriginal">원본을 같이 업로드</label>
-		</div> -->
-		<div class="form-check">
-			<input class="form-check-input" type="radio" name="sendTypeRadio" id="sendTypeRadio1" value="1" checked>
-			<label class="form-check-label" for="sendTypeRadio1">링크만 업로드</label>
-		</div>
-		<div class="form-check">
-			<input class="form-check-input" type="radio" name="sendTypeRadio" id="sendTypeRadio2" value="2">
-			<label class="form-check-label" for="sendTypeRadio2">원본을 같이 업로드</label>
-		</div>
+		<hr/>
+		
+		<a class="btn btn-primary" style="margin-bottom:10px; color:white;">빙고 작성</a>
+		
+		<nav aria-label="Page navigation example">
+			<ul class="pagination">
+				<li class="page-item"><a class="page-link" href="#">이전</a></li>
+				<li class="page-item active"><a class="page-link " href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#">다음</a></li>
+			</ul>
+		</nav>
 	</div>
-	
-	<script>
+</body>
+
+<script type="text/javascript">
 	$(function(){
-		$("#twitterBtn").click(function(){
-			var value = $(":radio[name='sendTypeRadio']:checked").val();
-			alert("Twitter : " + value);
-		})
-		
-		$("#facebookBtn").click(function(){
-			var value = $(":radio[name='sendTypeRadio']:checked").val();
-			alert("Facebook : " + value);
-		})
-		
-		$("#imageBtn").click(function(){
-			alert("이미지로 저장");
+		$('#boardList tr').bind('click', function(){
+			var num = $(this).children().first().text();
+			
+			window.location = "/bingo/selectBingoIntro.do?bingoId=" + num;
 		})
 	})
-	</script>
-</body>
+</script>

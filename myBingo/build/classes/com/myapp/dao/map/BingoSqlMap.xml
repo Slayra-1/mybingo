@@ -3,8 +3,9 @@
 <mapper namespace="Bingo">
 
 	<select id="selectBingo" parameterType="hashmap" resultType="hashmap">
-		SELECT ID	AS "bingoId"
-			  ,TYPE	AS "type"
+		SELECT ID		AS "bingoId"
+			  ,TITLE	AS "title"
+			  ,TYPE		AS "type"
 			  ,DATE_FORMAT(REG_DATE, '%Y-%m-%d')     AS "regDate"
 		  FROM BINGO
 		 WHERE USE_YN = 'Y'
