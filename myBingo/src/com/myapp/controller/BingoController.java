@@ -31,7 +31,7 @@ public class BingoController {
 	@RequestMapping(value="/bingo/goBingoListPage.do")
 	public String goBingoPage(HttpSession session, HttpServletRequest request, HttpServletResponse response, Model model) {
 		
-		return "../document/bingo/bingoPage";
+		return "../document/bingo/bingoPage"; 
 	}
 	
 	// 빙고 조회 페이지 이동
